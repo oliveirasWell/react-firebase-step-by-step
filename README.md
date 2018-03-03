@@ -1,4 +1,4 @@
-# criando-uma-aplicacao-react-firebase-em-10-min
+# create-a-react-firebase-app-in-10-min
 
 A small React example using Firebase.
 
