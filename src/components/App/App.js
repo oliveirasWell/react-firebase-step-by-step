@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import './App.css';
 import {MuiThemeProvider} from "material-ui/styles/index";
-import {AppBar, IconButton, Toolbar, Typography} from "material-ui";
-import MenuIcon from 'material-ui-icons/Menu';
+import {AppBar, Toolbar, Typography} from "material-ui";
 import {createMuiTheme} from 'material-ui/styles';
 import red from 'material-ui/colors/red';
+import {DataTable} from "../DataTable/DataTable";
 
 const theme = createMuiTheme({
     palette: {
@@ -13,6 +13,19 @@ const theme = createMuiTheme({
 });
 
 class App extends Component {
+
+    state = {
+        data: [
+            {
+                key: 'test key key',
+                temperatura: 'test key temperatura',
+                umidade: 'test key umidade',
+                cliente: 'test key cliente',
+                data: 'test key data',
+            }
+        ]
+    };
+
     render() {
         return (
             <MuiThemeProvider theme={theme}>
@@ -24,6 +37,7 @@ class App extends Component {
                             </Typography>
                         </Toolbar>
                     </AppBar>
+                    <DataTable data={this.state.data}/>
                 </React.Fragment>
             </MuiThemeProvider>
         );
