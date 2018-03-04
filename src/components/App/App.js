@@ -15,6 +15,8 @@ import Login from "../Login/Login";
 import {connect} from "react-redux";
 import {login, logout} from "../../action/actionCreator";
 import {compose} from "recompose";
+import NavigationWrapper from '../NavigationWrapper/NavigationWrapper';
+import NavigationLoggedWrapper from "../NavigationWrapper/NavigationLoggedWrapper";
 
 const theme = createMuiTheme({
     palette: {
@@ -48,32 +50,29 @@ class App extends Component {
 
                     <Card style={{margin: '50px'}}>
                         <CardContent>
-
-                            <Route exact
-                                   path={urls.login.path}
-                                   render={(props) => <Login {...props}/>}
+                            <Route exact path={urls.login.path}
+                                   render={(props) =>
+                                       <NavigationLoggedWrapper component={Welcome} {...props}/>}
                             />
-
-                            <Route exact
-                                   path={urls.home.path}
-                                   render={(props) => <Welcome {...props}/>}
+                            <Route exact path={urls.home.path}
+                                   render={(props) =>
+                                       <NavigationWrapper component={Welcome} {...props}/>}
                             />
-
-                            <Route exact
-                                   path={urls.data.path}
-                                   render={(props) => <DataTable {...props} data={this.state.data}/>}
+                            <Route exact path={urls.data.path}
+                                   render={(props) =>
+                                       <NavigationWrapper component={DataTable}
+                                                          {...props}
+                                                          data={this.state.data}
+                                       />}
                             />
-
-                            <Route exact
-                                   path={urls.add.path}
-                                   render={(props) => <Add {...props} />}
+                            <Route exact path={urls.add.path}
+                                   render={(props) =>
+                                       <NavigationWrapper component={Add} {...props}/>}
                             />
-
-                            <Route exact
-                                   path={privateUrls.edit.path}
-                                   render={(props) => <Add {...props} />}
+                            <Route exact path={privateUrls.edit.path}
+                                   render={(props) =>
+                                       <NavigationWrapper component={Add} {...props}/>}
                             />
-
                         </CardContent>
                     </Card>
 

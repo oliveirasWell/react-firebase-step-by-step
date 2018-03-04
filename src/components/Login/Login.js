@@ -15,16 +15,13 @@ class Login extends Component {
         event.preventDefault();
         const {email} = this.state;
         const {password} = this.state;
-        FirebaseService.login(email, password).then(
-            (user) => {
+        FirebaseService.login(email, password)
+            .then(() => {
                 this.props.history.push(urls.home.path);
-                console.log(user);
-            }
-        ).catch(
-            (error) => {
-                alert(error.message)
-            }
-        )
+            })
+            .catch(error => {
+                alert(error.message);
+            });
     };
 
     createUser = (event) => {
