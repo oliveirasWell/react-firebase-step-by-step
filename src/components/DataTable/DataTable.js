@@ -1,6 +1,8 @@
 import React from 'react';
 import {Button, Table, TableBody, TableCell, TableHead, TableRow, Typography} from "material-ui";
 import FirebaseService from "../../services/FirebaseService";
+import {Link} from "react-router-dom";
+import {privateUrls} from "../../utils/urlUtils";
 
 export const DataTable = ({data}) => {
 
@@ -34,6 +36,11 @@ export const DataTable = ({data}) => {
                                 <Button onClick={() => remove(item.key)}>
                                     Remove
                                 </Button>
+
+                                <Button component={props => <Link to={privateUrls.edit.pathWithouParam + item.key} {...props}/>}>
+                                    Edit
+                                </Button>
+
                             </TableCell>
                         </TableRow>
                     )

@@ -7,7 +7,7 @@ import red from 'material-ui/colors/red';
 import {DataTable} from "../DataTable/DataTable";
 import FirebaseService from "../../services/FirebaseService";
 import {Route, withRouter} from "react-router-dom";
-import {urls} from "../../utils/urlUtils";
+import {privateUrls, urls} from "../../utils/urlUtils";
 import Add from "../Add/Add";
 import {Welcome} from "../Welcome/Welcome";
 import {TopBar} from "./TopBar";
@@ -53,6 +53,11 @@ class App extends Component {
 
                             <Route exact
                                    path={urls.add.path}
+                                   render={(props) => <Add {...props} />}
+                            />
+
+                            <Route exact
+                                   path={privateUrls.edit.path}
                                    render={(props) => <Add {...props} />}
                             />
 
