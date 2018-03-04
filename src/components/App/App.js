@@ -11,6 +11,7 @@ import {privateUrls, urls} from "../../utils/urlUtils";
 import Add from "../Add/Add";
 import {Welcome} from "../Welcome/Welcome";
 import {TopBar} from "./TopBar";
+import Login from "../Login/Login";
 
 const theme = createMuiTheme({
     palette: {
@@ -40,6 +41,11 @@ class App extends Component {
 
                     <Card style={{margin: '50px'}}>
                         <CardContent>
+
+                            <Route exact
+                                   path={urls.login.path}
+                                   render={(props) => <Login {...props}/>}
+                            />
 
                             <Route exact
                                    path={urls.home.path}

@@ -1,4 +1,4 @@
-import {firebaseDatabase} from '../utils/firebaseUtils'
+import {firebaseDatabase, firebaseAuth} from '../utils/firebaseUtils'
 
 export default class FirebaseService {
     static getDataList = (nodePath, callback, size = 10) => {
@@ -50,6 +50,28 @@ export default class FirebaseService {
 
     static updateData = (id, node, obj) => {
         return firebaseDatabase.ref(node + '/' + id).set({...obj});
+    };
+
+    static createUser = (email, password) => {
+        return firebaseAuth.createUserWithEmailAndPassword(email, password);
+    };
+
+    static login = (email, password) => {
+        return firebaseAuth.signInWithEmailAndPassword(email, password);
+    };
+
+    static logout = () => {
+        return firebaseAuth.signOut();
+    };
+
+    static onAuthChange = (callbackLogin, callbackLogout) => {
+        firebaseAuth.onAuthStateChanged(authUser => {
+            if (!authUser) {
+                callbackLogout(authUser);
+            } else {
+                callbackLogin(authUser);
+            }
+        });
     };
 
 }

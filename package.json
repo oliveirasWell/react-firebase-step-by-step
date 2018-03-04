@@ -6,10 +6,15 @@
     "firebase": "^4.10.1",
     "material-ui": "^1.0.0-beta.35",
     "material-ui-icons": "^1.0.0-beta.35",
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "recompose": "^0.26.0",
+    "redux": "^3.7.2",
+    "redux-persist": "^5.9.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -19,4 +24,3 @@
     "deploy": "yarn run build && firebase deploy"
   }
 }
-
