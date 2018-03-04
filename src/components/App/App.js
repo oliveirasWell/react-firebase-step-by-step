@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import './App.css';
 import {MuiThemeProvider} from "material-ui/styles/index";
-import {AppBar, Toolbar, Typography} from "material-ui";
+import {Card, CardContent} from "material-ui";
 import {createMuiTheme} from 'material-ui/styles';
 import red from 'material-ui/colors/red';
 import {DataTable} from "../DataTable/DataTable";
 import FirebaseService from "../../services/FirebaseService";
+import {Route, withRouter} from "react-router-dom";
+import {urls} from "../../utils/urlUtils";
+import Add from "../Add/Add";
+import {Welcome} from "../Welcome/Welcome";
+import {TopBar} from "./TopBar";
 
 const theme = createMuiTheme({
     palette: {
@@ -20,26 +25,39 @@ class App extends Component {
     };
 
     componentDidMount() {
-        FirebaseService.getDataList('leituras', (dataReceived) => this.setState({data: dataReceived}), 20)
+        FirebaseService.getDataList('leituras', (dataReceived) => this.setState({data: dataReceived}))
     }
 
     render() {
+
+
         return (
             <MuiThemeProvider theme={theme}>
-                <React.Fragment>
-                    <AppBar position="static">
-                        <Toolbar>
-                            <Typography type="title" color="inherit">
-                                My Awesome React App
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
 
-                    {
-                        this.state.data !== undefined && this.state.data.length !== 0
-                            ? <DataTable data={this.state.data}/>
-                            : <div style={{textAlign:'center'}}>It's empty</div>
-                    }
+                <React.Fragment>
+
+                    <TopBar/>
+
+                    <Card style={{margin: '50px'}}>
+                        <CardContent>
+
+                            <Route exact
+                                   path={urls.home.path}
+                                   render={(props) => <Welcome {...props}/>}
+                            />
+
+                            <Route exact
+                                   path={urls.data.path}
+                                   render={(props) => <DataTable {...props} data={this.state.data}/>}
+                            />
+
+                            <Route exact
+                                   path={urls.add.path}
+                                   render={(props) => <Add {...props} />}
+                            />
+
+                        </CardContent>
+                    </Card>
 
                 </React.Fragment>
             </MuiThemeProvider>
@@ -47,4 +65,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default withRouter(App);
