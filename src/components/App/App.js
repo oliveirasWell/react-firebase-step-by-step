@@ -10,8 +10,11 @@ import {Route, withRouter} from "react-router-dom";
 import {privateUrls, urls} from "../../utils/urlUtils";
 import Add from "../Add/Add";
 import {Welcome} from "../Welcome/Welcome";
-import {TopBar} from "./TopBar";
+import TopBar from "./TopBar";
 import Login from "../Login/Login";
+import {connect} from "react-redux";
+import {login, logout} from "../../action/actionCreator";
+import {compose} from "recompose";
 
 const theme = createMuiTheme({
     palette: {
@@ -26,6 +29,10 @@ class App extends Component {
     };
 
     componentDidMount() {
+        FirebaseService.onAuthChange(
+            (authUser) => this.props.login(authUser),
+            () => this.props.logout()
+        );
         FirebaseService.getDataList('leituras', (dataReceived) => this.setState({data: dataReceived}))
     }
 
@@ -76,4 +83,14 @@ class App extends Component {
     }
 }
 
-export default withRouter(App);
+const mapDispatchToProps = dispatch => {
+    return {
+        login: authUser => dispatch(login(authUser)),
+        logout: () => dispatch(logout()),
+    }
+};
+
+export default compose(
+    withRouter,
+    connect(null, mapDispatchToProps)
+)(App);
