@@ -5,6 +5,7 @@ import {AppBar, Toolbar, Typography} from "material-ui";
 import {createMuiTheme} from 'material-ui/styles';
 import red from 'material-ui/colors/red';
 import {DataTable} from "../DataTable/DataTable";
+import FirebaseService from "../../services/FirebaseService";
 
 const theme = createMuiTheme({
     palette: {
@@ -15,16 +16,12 @@ const theme = createMuiTheme({
 class App extends Component {
 
     state = {
-        data: [
-            {
-                key: 'test key key',
-                temperatura: 'test key temperatura',
-                umidade: 'test key umidade',
-                cliente: 'test key cliente',
-                data: 'test key data',
-            }
-        ]
+        data: []
     };
+
+    componentDidMount() {
+        FirebaseService.getDataList('leituras', (dataReceived) => this.setState({data: dataReceived}), 20)
+    }
 
     render() {
         return (
@@ -37,7 +34,13 @@ class App extends Component {
                             </Typography>
                         </Toolbar>
                     </AppBar>
-                    <DataTable data={this.state.data}/>
+
+                    {
+                        this.state.data !== undefined && this.state.data.length !== 0
+                            ? <DataTable data={this.state.data}/>
+                            : <div style={{textAlign:'center'}}>It's empty</div>
+                    }
+
                 </React.Fragment>
             </MuiThemeProvider>
         );
