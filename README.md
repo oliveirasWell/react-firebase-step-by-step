@@ -1,5 +1,4 @@
-# create-a-react-firebase-app-in-10-min
-
+# react-firebase-step-by-step
 The tutorials of how it was made are:
 
 In pt/br [part 1 here](https://blog.tecsinapse.com.br/criando-uma-aplica%C3%A7%C3%A3o-react-firebase-passo-a-passo-9ebc5a8a442f) and [part 2 here](https://blog.tecsinapse.com.br/utilizando-react-redux-firebase-2bf93ea9f422)
