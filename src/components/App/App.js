@@ -52,7 +52,7 @@ class App extends Component {
                         <CardContent>
                             <Route exact path={urls.login.path}
                                    render={(props) =>
-                                       <NavigationLoggedWrapper component={Welcome} {...props}/>}
+                                       <NavigationLoggedWrapper component={Login} {...props}/>}
                             />
                             <Route exact path={urls.home.path}
                                    render={(props) =>
